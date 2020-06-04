@@ -1,21 +1,47 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+  register Sinatra::ActiveRecordExtension
 
   configure do
     set :public_folder, 'public'
-    set :views, 'app/views'
+    set :views, Proc.new { File.join(root, "../views/") }
+    enable :sessions
+    set :session_secret, "secret" #need to fix this for production, standin ONLY
   end
-
-  credentials = Aws::Credentials.new(
-   'AKIA2MPVCMTYIFYKBAPV', 'QeM6Nsg+3yimknEgCkegvFjhf5OO6rBUH7VHnb8n')
-   client = Aws::Rekognition::Client.new credentials: credentials
 
   get "/" do
     erb :welcome
   end
 
-  post "/create" do
+  get '/signup' do
+    erb :'/signup'
   end
+
+  post '/signup/user' do
+    @user = User.new(username: params["name"], email: params["email"], password: params["password"])
+    @user.save
+    session[:user_id] = @user.id
+
+    redirect  '/controllers/collections_controller/home'
+  end
+
+  post '/login' do
+   @user = User.find_by(params)
+    if @user != nil && params[:password] == @user.password
+      session[:user_id] = @user.id
+      redirect '/controllers/collections_controller/home'
+    else
+      erb :error
+    end
+  end
+
+  get '/logout' do
+    session.clear
+    redirect '/'
+  end
+
+
+
 
 end
