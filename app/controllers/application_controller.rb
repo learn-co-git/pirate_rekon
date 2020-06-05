@@ -1,5 +1,3 @@
-require './config/environment'
-
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
 
@@ -10,6 +8,20 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret" #need to fix this for production, standin ONLY
   end
 
+  helpers do
+    def current_user(session)
+      @user = User.find(session["user_id"])
+    end
+
+    def is_logged_in?(session)
+      !session["user_id"].nil?
+    end
+
+    def confirm_user(session)
+      @user.id == session[:user.id]
+    end
+  end
+
   get "/" do
     erb :welcome
   end
@@ -18,30 +30,38 @@ class ApplicationController < Sinatra::Base
     erb :'/signup'
   end
 
-  post '/signup/user' do
-    @user = User.new(username: params["name"], email: params["email"], password: params["password"])
-    @user.save
-    session[:user_id] = @user.id
-
-    redirect  '/controllers/collections_controller/home'
+  post '/signup' do
+    if params[:username].empty? || params[:password].empty?
+      erb :error
+    else
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user.save
+      redirect  '/login'
+    end
   end
 
-  post '/login' do
-   @user = User.find_by(params)
-    if @user != nil && params[:password] == @user.password
-      session[:user_id] = @user.id
-      redirect '/controllers/collections_controller/home'
+  post '/login' do #had issues moving data from one controller to another
+    @params = params
+    user = User.find_by_email(@params[:email])
+    if user != nil && user.authenticate(@params[:password])
+
+        @user = User.new(:id => user[:id], :username => user[:username], :email => user[:email], :password => user[:password])
+
+        session[:user_id] = @user.id
+        binding.pry
+        redirect to "/home"
     else
       erb :error
     end
+  end
+
+  get '/login' do
+    erb :login
   end
 
   get '/logout' do
     session.clear
     redirect '/'
   end
-
-
-
-
+  
 end

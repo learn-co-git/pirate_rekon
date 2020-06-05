@@ -1,5 +1,7 @@
 
 
-<h1>Welcome <%=#{@user}%> </h1><br>
-<p>Add an image to get started</p>
-<p>Compare it with other images from other users'</p>
+<h1>Welcome <%=@user.username%></h1><br>
+
+<p>Open an existing collection => <a href="/images">Open Collection</a></p><br>
+
+<p>Create collection => <a href="/create">Create Collection</a></p><br>

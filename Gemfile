@@ -12,6 +12,7 @@ gem 'pry'
 gem 'bcrypt'
 gem 'tux'
 gem 'aws-sdk-rekognition'
+gem 'cloudinary'
 
 group :test do
   gem 'rspec'

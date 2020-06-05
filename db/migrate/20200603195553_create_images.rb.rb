@@ -5,7 +5,6 @@ class CreateImages < ActiveRecord::Migration
        t.integer :user_id
        t.integer :collection_id
        t.datetime :creation_date
-       t.binary :copy
      end
   end
 end

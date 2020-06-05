@@ -1,8 +1,8 @@
+require 'aws-sdk-rekognition'
+
 class Image < ActiveRecord::Base
-  belongs_to :user
   belongs_to :collection
 
-  require 'aws-sdk-rekognition'
   credentials = Aws::Credentials.new(
      'AKIA2MPVCMTYIFYKBAPV', 'QeM6Nsg+3yimknEgCkegvFjhf5OO6rBUH7VHnb8n')
 
