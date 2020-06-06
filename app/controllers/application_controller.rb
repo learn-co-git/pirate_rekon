@@ -48,7 +48,7 @@ class ApplicationController < Sinatra::Base
         @user = User.new(:id => user[:id], :username => user[:username], :email => user[:email], :password => user[:password])
 
         session[:user_id] = @user.id
-        binding.pry
+
         redirect to "/home"
     else
       erb :error
@@ -63,5 +63,5 @@ class ApplicationController < Sinatra::Base
     session.clear
     redirect '/'
   end
-  
+
 end

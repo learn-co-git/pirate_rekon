@@ -17,15 +17,13 @@ ActiveRecord::Schema.define(version: 20200603195625) do
     t.string   "name"
     t.datetime "creation_date"
     t.integer  "user_id"
-    t.integer  "image_id"
-    t.string   "img_location"
   end
 
   create_table "images", force: :cascade do |t|
     t.string   "name"
-    t.integer  "user_id"
-    t.integer  "collection_id"
+    t.string   "url"
     t.datetime "creation_date"
+    t.integer  "collection_id"
   end
 
   create_table "users", force: :cascade do |t|

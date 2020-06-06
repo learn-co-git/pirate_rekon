@@ -4,8 +4,6 @@ class CreateCollections < ActiveRecord::Migration
       t.string :name
       t.datetime :creation_date
       t.integer :user_id
-      t.integer :image_id
-      t.string :img_location
     end
   end
 end
