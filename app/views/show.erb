@@ -1,6 +1,6 @@
-<h1>This is the show page</h1>
-<%@collections.each do |album|
-  <%=album.name%>
-  <%user_pics = @images.select {|pic| album.id == pic[:collection_id]}%>
-  <%user_pics.length.times do %>
-  
+<h1>Your current albums <%="#{@user[:username]}"%> </h1>
+<%@collection.each_with_index do |album, i|%>
+  <h3><%puts%><%="#{i + 1}" + "....." + "#{album[:name]}"%></h3>
+  <%end%><br><br>
+
+  <h2><a href="/collections/<%="#{:user_id}"%>/edit">Modify Album</a</h2>
