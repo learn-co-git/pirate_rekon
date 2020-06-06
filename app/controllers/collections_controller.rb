@@ -5,19 +5,26 @@ class CollectionsController < ApplicationController
     erb :home
   end
 
-  get '/collections/:id' do
-     @collection = Collection.find(params[:id])
+  get '/collections/:user_id' do #display all the users collections
+    #binding.pry
+     @collection = Collection.all.select {|record| record.user_id == params[:user_id].to_i}
+     @images = Image.all
      erb :show
   end
 
-  get '/new' do
+  get '/new' do #new collection
     erb :new
   end
 
-  post '/collections' do
+  get 'images/new' do #add new image to existing collection
+    erb :images_new
+  end
+
+  post '/collections' do #create new collection
     @user_collection = Collection.new(:name => params[:collection], :creation_date => Time.now, :user_id => session[:user_id])
+    @user_collection.id = session[:user_id]
     @user_collection.save
-    redirect "/collections/#{@user_collection.id}"
+    redirect to "/collections/#{@user_collection.user_id}"
   end
 
 

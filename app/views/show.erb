@@ -1,0 +1,6 @@
+<h1>This is the show page</h1>
+<%@collections.each do |album|
+  <%=album.name%>
+  <%user_pics = @images.select {|pic| album.id == pic[:collection_id]}%>
+  <%user_pics.length.times do %>
+  
