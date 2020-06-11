@@ -11,8 +11,19 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'tux'
+gem 'aws-sdk'
 gem 'aws-sdk-rekognition'
+gem 'carrierwave'
 gem 'cloudinary'
+gem 'faraday'
+gem 'multipart-post'
+gem 'rack'
+gem 'json'
+gem 'httparty'
+gem 'activesupport'
+
+
+
 
 group :test do
   gem 'rspec'

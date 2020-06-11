@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: argustwo
+  api_key: '878221219951367'
+  api_secret: eldWr7Y5drgSfWrc6kg-zN9R3Fo
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: argustwo
+  api_key: '878221219951367'
+  api_secret: eldWr7Y5drgSfWrc6kg-zN9R3Fo
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: argustwo
+  api_key: '878221219951367'
+  api_secret: eldWr7Y5drgSfWrc6kg-zN9R3Fo
+  enhance_image_tag: true
+  static_file_support: false

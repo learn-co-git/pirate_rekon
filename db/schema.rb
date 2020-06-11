@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20200603195625) do
     t.string   "name"
     t.datetime "creation_date"
     t.integer  "user_id"
+    t.integer  "num_images"
   end
 
   create_table "images", force: :cascade do |t|

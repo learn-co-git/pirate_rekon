@@ -1,5 +1,6 @@
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
+  require 'httparty'
 
   configure do
     set :public_folder, 'public'
@@ -19,6 +20,20 @@ class ApplicationController < Sinatra::Base
 
     def confirm_user(session)
       @user.id == session[:user.id]
+    end
+
+    def confirm_collection(session)
+      Collection.all.select {|record| record.user_id == session[:user_id]}
+    end
+
+    def user_images(session)
+      Image.all.select {|picture| session[:user_id] == picture.collection_id}
+    end
+
+    def cloud_search(session)
+      Cloudinary::Search
+      .expression("folder=#{current_user(session).username}")
+      .execute
     end
   end
 
@@ -66,6 +81,6 @@ class ApplicationController < Sinatra::Base
 
   get '/error' do
     erb :error
-  end 
+  end
 
 end

@@ -1,6 +1,6 @@
-<h1>Your current albums <%="#{@user[:username]}"%> </h1>
+<h1>Your Album <%="#{@user[:username]}"%> </h1><br><br>
 <%@collection.each_with_index do |album, i|%>
-  <h3><%puts%><%="#{i + 1}" + "....." + "#{album[:name]}"%></h3>
+  <h2><%puts%><%="....." + "#{album[:name]}" + "....."%></h2>
   <%end%><br><br>
-
-  <h2><a href="/collections/<%="#{:user_id}"%>/edit">Modify Album</a</h2>
+  <a href="/collections/<%="#{@collection.first.user_id}"%>/edit">Add Images</a><br><br>
+  <br><a href="/index/<%="#{@collection.first.user_id}"%>">Go to Album</a><br>
