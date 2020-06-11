@@ -1,4 +1,5 @@
 require './config/environment'
+require './config/initializers/cloudinary.rb'
 
 
 if ActiveRecord::Migrator.needs_migration?

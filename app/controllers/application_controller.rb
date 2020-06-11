@@ -1,6 +1,5 @@
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
-  require 'httparty'
 
   configure do
     set :public_folder, 'public'

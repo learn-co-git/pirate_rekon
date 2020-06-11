@@ -9,7 +9,7 @@ require 'open-uri'
 require 'base64'
 require 'aws-sdk'
 require 'aws-sdk-s3'
-require 'httparty'
+
 
 
 Aws.config.update({

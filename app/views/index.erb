@@ -1,6 +1,9 @@
 <h1>Your Images</h1><br><br>
-  <h3>Select the images you would like process.</h3><br>
-  <p>Choose two, we'll examine the liklihood they are the same individual.</p><br>
+  <h3>Option 1.</h3><br>
+  <p>Choose any two, we'll examine the likelihood that any one individual resides in both images.</p><br>
+
+  <h3>Option 2.</h3><br>
+  <p>Process, label and find every other image in your collection with that individual. Or search other collections.</p>
 
 <%redirect '/error' if Image.all == nil%>
 <head>
@@ -23,7 +26,7 @@
   <input type="text" id="imageOne" name="imageOne"><br><br>
   <label for="imageTwo">Image Two:</label><br>
   <input type="text" id="imageTwo" name="imageTwo">
-  <input type="submit" value="Process">
-</form>
+  <input type="submit" value="Compare">
+</form><br><br>
 
 <a href="/collections/<%="#{session[:user_id]}"%>/edit">Add Images</a>
