@@ -1,5 +1,6 @@
 require 'aws-sdk-rekognition'
-
+require 'net/http'
+require 'uri'
 class Image < ActiveRecord::Base
   belongs_to :collection
 
@@ -7,15 +8,15 @@ class Image < ActiveRecord::Base
   Credentials = Aws::Credentials.new(
      'AKIA2MPVCMTYMIW5DK4A', 'khGL1/kfd76KmT2/FrJXHoxqM9kSjB75yQFJDjKQ')
 
-  def self.process(img1Url, img2Url)
+  def open(url)
+    Net::HTTP.get(URI.parse(url))
+  end
+
+  def self.process(source, target)
      client = Aws::Rekognition::Client.new credentials: Credentials
 
-     #photo1 = 'image1.jpeg'
-     path1 = '(img1Url)'
-     #photo2 = 'image2.jpeg'
-     path2 = '(img2Url)'
-     file1 = open(path1) {|f| f.read}
-     file2 = open(path2) {|f| f.read}
+     file1 = open(source) {|f| f.read}
+     file2 = open(target) {|f| f.read}
 
      resp = client.compare_faces({
        similarity_threshold: 90,
@@ -26,6 +27,5 @@ class Image < ActiveRecord::Base
          bytes: file2
        },
       })
-  binding.pry
   end
 end

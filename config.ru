@@ -8,5 +8,6 @@ end
 
 use Rack::MethodOverride
 
+use ImagesController
 use CollectionsController
 run ApplicationController

@@ -1,4 +1,3 @@
-  require 'open-uri'
 
 class CollectionsController < ApplicationController
 
@@ -11,6 +10,8 @@ class CollectionsController < ApplicationController
       redirect "/collections/#{:user_id}"
     end
   end
+  #technically a user can create more then 1 collection,
+  #decided to remove this functionality without actually do so.
 
   get '/collections/:user_id' do #display user and all images
      @collection = Collection.all.select {|record| record.user_id == session[:user_id].to_i}
@@ -24,26 +25,7 @@ class CollectionsController < ApplicationController
     erb :new
   end
 
-  get '/images/new' do #image added to cloud prior step
-
-    result = cloud_search(session) #all user's images
-    added_images = result["resources"].length - confirm_collection(session)[0].num_images #determine #of new images just added, SMALL DELAY IN CLOUD STORAGE!
-
-    x = -1
-    while added_images >= 0 #add images to my DB
-      image = result["resources"][x]
-      new_image = Image.new(:name => image["filename"], :url => image["url"], :creation_date => Time.now, :collection_id => session[:user_id])
-      #add the new images stored in the cloud to my database
-      new_image.save
-      confirm_collection(session)[0].num_images += 1 #increment collection num_images
-
-      x -= 1 && added_images -= 1
-    end
-      @user_images = user_images(session)
-    erb :index
-  end
-
-  get '/index/:id' do
+  get '/index/:id' do    #user id
     @user_images = user_images(session) #show all user images
     erb :index
   end
@@ -68,11 +50,4 @@ class CollectionsController < ApplicationController
     redirect '/images/new'
   end
 
-  post '/process' do
-    require 'net/http'
-    idx1 = (params["imageOne"].to_i) - 1
-    idx2 = (params["imageTwo"].to_i) - 1
-    source = user_images(session)[idx1].url
-    target = user_images(session)[idx2].url
-  end
 end

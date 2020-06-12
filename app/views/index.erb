@@ -5,28 +5,30 @@
   <h3>Option 2.</h3><br>
   <p>Process, label and find every other image in your collection with that individual. Or search other collections.</p>
 
-<%redirect '/error' if Image.all == nil%>
-<head>
-<style>
+  <h3>Option 3.</h3><br>
+  <p>Delete an image.</p><br><br><br>
 
-</style>
-</head>
+<%redirect '/error' if Image.all == nil%>
 <body>
   <%result = cloud_search(session)%>
 <%result["resources"].each do |image|%>
-
 <img src=<%="#{image["url"]}"%> alt=<%="#{image["filename"].to_i}"%> width="128" height="128">
-<p>Image Id: <%="#{image["filename"].to_i}"%> </p><br>
+<p>Image Id: <%="#{image["public_id"]}"%> </p><br>
 <%end%>
 </body><br>
-<p>Enter the numerical value only.</p><br>
+<a href="/collections/<%="#{session[:user_id]}"%>/edit">Add Images</a><br><br>
+
+<p>Choose 2 Images to compare or Select a given image to delete.</p><br>
 
 <form action="/process" method="post">
-  <label for="imageOne">Image One:</label><br>
-  <input type="text" id="imageOne" name="imageOne"><br><br>
-  <label for="imageTwo">Image Two:</label><br>
-  <input type="text" id="imageTwo" name="imageTwo">
-  <input type="submit" value="Compare">
+  <label for="imageOne">Source Image:</label><br>
+  <input type="text" id="source" name="source"><br><br>
+  <label for="imageTwo">Target Image:</label><br>
+  <input type="text" id="target" name="target"><br><br>
+  <label for="delete_img">Delete Image:</label><br>
+  <input type="text" id="delete_img" name="delete_img"><br>
+  <input type="submit" value="Submit">
 </form><br><br>
 
-<a href="/collections/<%="#{session[:user_id]}"%>/edit">Add Images</a>
+<a href="/attributes/new">Process/Label</a><br>
+<a href="/logout">Logout</a>

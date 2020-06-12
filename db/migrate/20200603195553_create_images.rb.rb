@@ -5,6 +5,7 @@ class CreateImages < ActiveRecord::Migration
        t.string :url
        t.datetime :creation_date
        t.integer :collection_id
+       t.string :public_id
      end
   end
 end

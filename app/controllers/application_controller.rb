@@ -34,6 +34,11 @@ class ApplicationController < Sinatra::Base
       .expression("folder=#{current_user(session).username}")
       .execute
     end
+
+    def cloud_delete(num)
+      @user = User.find_by(session[:user_id])
+      Cloudinary::Api.delete_resources(['"#{@user.username}/num"'])
+    end
   end
 
   get "/" do

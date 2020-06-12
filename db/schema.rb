@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20200603195625) do
     t.string   "url"
     t.datetime "creation_date"
     t.integer  "collection_id"
+    t.string   "public_id"
   end
 
   create_table "users", force: :cascade do |t|
