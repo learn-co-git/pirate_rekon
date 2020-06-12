@@ -1,4 +1,4 @@
-<h1>Your Album <%="#{@user[:username]}"%> </h1><br><br>
+<h1>Your collection <%="#{@user[:username]}"%> </h1><br><br>
 <%@collection.each_with_index do |album, i|%>
   <h2><%puts%><%="....." + "#{album[:name]}" + "....."%></h2>
   <%end%><br><br>

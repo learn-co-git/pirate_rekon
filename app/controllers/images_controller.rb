@@ -12,9 +12,10 @@
     current_album.each {|image| current_album_urls << image.url}
     file = result["resources"].flatten
     (0...file.length).each do |i|
-      if current_album_urls.include?(file[i]["url"]) == false || current_album.empty?
+      if (current_album_urls.include?(file[i]["url"]))
+      else
         new_image = Image.new(:name => file[i]["filename"], :url => file[i]["url"], :creation_date => Time.now, :collection_id => session[:user_id], :public_id => file[i]["public_id"])
-
+        binding.pry
         new_image.save
         confirm_collection(session)[0].num_images += 1 #increment collection num_images
       end
@@ -36,9 +37,11 @@
     else
     idx1 = (params["source"])
     idx2 = (params["target"])
-    source = Image.find_by(:public_id[idx1])
-    target = Image.find_by(:public_id[idx2])
-    @compare = Image.process(source.url, target.url)
+    Image.all.select {|image| image.public_id == params["source"]}
+    source = cloud_search_public(idx1)
+    target = cloud_search_public(idx2)
+    binding.pry
+    @compare = Image.process(source["resources"][0]["url"], target["resources"][0]["url"])
     erb :show_compare
     end
   end

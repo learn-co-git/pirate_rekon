@@ -39,6 +39,20 @@ class ApplicationController < Sinatra::Base
       @user = User.find_by(session[:user_id])
       Cloudinary::Api.delete_resources(['"#{@user.username}/num"'])
     end
+
+    def num_images(session)
+      user_collection = Collection.find_by(session[:user_id])
+      @user_num_images = user_collection.num_images
+      @user_num_images
+    end
+
+    def cloud_search_public(id)
+
+      Cloudinary::Search
+      .expression("#{id}")
+      .execute
+    end
+
   end
 
   get "/" do
