@@ -3,7 +3,7 @@
   <p>Choose any two, we'll examine the likelihood that any one individual resides in both images.</p><br>
 
   <h3>Option 2.</h3><br>
-  <p>Process, label and find every other image in your collection with that individual. Or search other collections.</p>
+  <p>Process, label and find every other image in your collection and other collections with that individual or individuals. This process is a soft test, or one comprising of less rigorous examination. If soft test returns possible matches, it then advised to run each possible match through option one for a more rigorous testing.</p>
 
   <h3>Option 3.</h3><br>
   <p>Delete an image.</p><br><br><br>
@@ -18,13 +18,15 @@
 </body><br>
 <a href="/collections/<%="#{session[:user_id]}"%>/edit">Add Images</a><br><br>
 
-<p>Choose 2 Images to compare or Select a given image to delete.</p><br>
+<p>Choose 2 Images to compare, Select a given image to soft test against your collection and others' or delete an image.</p><br>
 
 <form action="/process" method="post">
   <label for="source">Source Image:</label><br>
   <input type="text" id="source" name="source"><br><br>
   <label for="target">Target Image:</label><br>
   <input type="text" id="target" name="target"><br><br>
+  <label for="soft">Soft Test Image:</label><br>
+  <input type="text" id="soft" name="soft"><br><br>
   <label for="delete_img">Delete Image:</label><br>
   <input type="text" id="delete_img" name="delete_img"><br>
   <input type="submit" value="Submit">

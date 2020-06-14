@@ -47,7 +47,6 @@ class ApplicationController < Sinatra::Base
     end
 
     def cloud_search_public(id)
-
       Cloudinary::Search
       .expression("#{id}")
       .execute

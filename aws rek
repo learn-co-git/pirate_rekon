@@ -1,0 +1,26 @@
+image_details.face_details[0].age_range.low   integer
+
+image_details.face_details[0].age_range.high  integer
+
+image_details.face_details[0].eyeglasses.value   bool
+
+image_details.face_details[0].eyeglasses.confidence float
+
+image_details.face_details[0].gender.value bool
+
+image_details.face_details[0].gender.confidence float
+
+image_details.face_details[0].beard.value  bool
+
+image_details.face_details[0].beard.confidence
+
+image_details.face_details[0].mustache.value
+
+image_details.face_details[0].mustache.confidence
+
+image_details.face_details[0].landmarks[i].type
+image_details.face_details[0].landmarks[i].x
+image_details.face_details[0].landmarks[i].
+
+image_details.face_details[0].quality.brightness
+image_details.face_details[0].quality.sharpness

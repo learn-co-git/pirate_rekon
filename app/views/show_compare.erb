@@ -1,4 +1,43 @@
+<h1>Your results in comparison against all other images</h1><br><br>
+
+
+
+
+
+
+
+
+
+
+<%positive_match = false%>
+<%possible_match = false%>
+<%inconclusive = false%>
+<%no_match = false%>
 <%binding.pry%>
-<%if @compare.face_matches.empty?%>
-  <h2>Your target had no faces that matched with any in source.</h2><br>
-  <%end%>
+<%@array.each do |result|%>
+  <%result.each do |pic|%>
+<%statement = ''%>
+<%if pic[0][0] > 55 && pic[0][1] < 10%>
+  <%positive_match = true%>
+<%elsif pic[0][0] > 40 || pic[0][1] < 20%>
+  <%possible_match = true%>
+<%elsif pic[0][1] > 25%>
+  <%no_match = true%>
+<%else%>
+  <%inconclusive = true%>
+<%end%>
+  <%if positive_match == true%>
+    <%statement = "We identified #{pic[1].name} as containing #{pic[3].label}. Use more accurate compare face method to confirm"%>
+  <%elsif possible_match == true%>
+    <%statement = "This image #{pic[1].name} possibly contains #{pic[3].label}."%>
+  <%elsif no_match == true%>
+    <%statement = "No match was found with #{pic[1].name}"%>
+  <%elsif inconclusive == true%>
+    <%statement = "Findings inconclusive for #{pic[1].name}"%>
+    <%end%>
+    <h2><%="#{statement}"%></h2><br><br>
+    <%end%>
+    <%end%>
+
+    <a href="/">the home page</a><br><br>
+    <a href="/logout">Logout</a><br><br>
