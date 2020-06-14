@@ -52,10 +52,12 @@ class ImagesController < ApplicationController
       end
      end
    end
+   binding.pry #you need to place this ["BEGINNEW59/19/image1"] into database
    redirect "/show/results/#{@source.id}"
  end
 
  get "/show/results/:id" do
+   @array
    erb :show_compare
  end
 

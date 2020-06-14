@@ -204,7 +204,7 @@ class Image < ActiveRecord::Base
 
               result = [pos_counter, neg_counter]
                                                         #use id here, after....
-              results = "BEGINNEW + #{result[0]} + '/' + #{result[1]} + '/' + #{target.name}"
+              results = "BEGINNEW" + "#{result[0]}" + '/' + "#{result[1]}" + '/' + "#{target.name}"
               results
    end
 end
