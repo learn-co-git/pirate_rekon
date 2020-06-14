@@ -70,7 +70,7 @@ class Image < ActiveRecord::Base
 
        (pos_counter += 1) if (95..(99.9)).include?(source.eyeglass_con.to_f) && ((0.80)..(0.99)).include?(source.eyeglass_con.to_f)
 
-       source.gender == target.gender ? (pos_counter += 1) : (neg_counter += 100) unless source.gender_con.to_f < 95 || target.gender_con.to_f < 95
+       source.gender == target.gender ? (pos_counter += 1) : (neg_counter += 100) unless source.gender_con.to_f < 80 || target.gender_con.to_f < 80
 
        (pos_counter += 1) if source.beard == target.beard unless source.beard_con.to_f < 85 || target.beard_con.to_f < 85
        (neg_counter += 7) if source.beard != target.beard
@@ -152,9 +152,9 @@ class Image < ActiveRecord::Base
                 val1 = ((pic1[0].to_f) - (pic2[0].to_f))
                 val2 = ((pic1[1].to_f) - (pic2[1].to_f))
                 pos_counter += 1 if val2.abs() < 0.043
-                neg_counter += 2 if val2.abs() > 0.09
+                neg_counter += 4 if val2.abs() > 0.09
                 pos_counter += 1 if val1.abs() < 0.1
-                neg_counter += 2 if val1.abs() > 0.2
+                neg_counter += 4 if val1.abs() > 0.2
                 test << [val1, val2]
               end
 
@@ -166,7 +166,7 @@ class Image < ActiveRecord::Base
 
               if analysis[:sharp_diff] < 3
                 pos_counter += 1
-              elsif analysis[:sharp_diff] > 9
+              elsif analysis[:sharp_diff] > 8
                 neg_counter += 20
               end
 
@@ -181,25 +181,25 @@ class Image < ActiveRecord::Base
                 pos_counter += 1
               end
               if analysis[:bound_box][0] > 0.2
-                neg_counter += 4
+                neg_counter += 5
               end
               if analysis[:bound_box][1] < 0.1
                 pos_counter += 1
               end
               if analysis[:bound_box][1] > 0.2
-                neg_counter += 4
+                neg_counter += 5
               end
               if analysis[:bound_box][2] < 0.01
                 pos_counter += 1
               end
               if analysis[:bound_box][2] > 0.02
-                neg_counter += 4
+                neg_counter += 5
               end
               if analysis[:bound_box][3] < 0.05
                 pos_counter += 1
               end
               if analysis[:bound_box][3] > 0.1
-                neg_counter += 4
+                neg_counter += 5
               end
 
               result = [pos_counter, neg_counter]

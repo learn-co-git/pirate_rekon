@@ -52,12 +52,17 @@ class ImagesController < ApplicationController
       end
      end
    end
-   binding.pry #you need to place this ["BEGINNEW59/19/image1"] into database
+    simple_array = []
+   @array.each do |file|
+     simple_array << file[8...file.length]
+    end
+   @image = Image.find_by_id(@source.id) #this is technically an update
+   @image.compare_result = @array.join() # but non-user initiated
+   @image.save
    redirect "/show/results/#{@source.id}"
  end
 
  get "/show/results/:id" do
-   @array
    erb :show_compare
  end
 

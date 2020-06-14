@@ -1,21 +1,20 @@
 <h1>Your results in comparison against all other images</h1><br><br>
-
-
-
-
-
-
-
-
-
+<%first = nil%>
+<%second = nil%>
+<%image_name = ''%>
+<%@image = Image.find_by_id(params[:id])%>
+<%@image.compare_result.each do |file|%>
+      <%new_file = file[8...file.length]%>
+      <%first = new_file[0..1].to_i%>
+      <%second = new_file[3..4].to_i%>
+      <%image_name = new_file[6...new_file.length]%>
+      
+<%binding.pry%>
 
 <%positive_match = false%>
 <%possible_match = false%>
 <%inconclusive = false%>
 <%no_match = false%>
-
-<%@array.each do |result|%>
-  <%result.each do |pic|%>
 <%statement = ''%>
 <%if pic[0][0] > 55 && pic[0][1] < 10%>
   <%positive_match = true%>
