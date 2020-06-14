@@ -13,7 +13,7 @@ class ImagesController < ApplicationController
    (0...file.length).each do |i|
      if (current_album_urls.include?(file[i]["url"]))
      else
-       new_image = Image.new(:name => file[i]["filename"], :url => file[i]["url"], :creation_date => Time.now, :collection_id => session[:user_id], :public_id => file[i]["public_id"])
+       new_image = Image.new(:name => file[i]["filename"], :url => file[i]["url"], :creation_date => Time.now, :collection_id => session[:user_id], :public_id => file[i]["public_id"], :box_width => , :box_height => , :box_left => , :box_top => , :age_low => , :age_high => , :eyeglasses => , :eyeglasses_con => , :gender => , :gender_con => , :beard => , :beard_con => , :mustache => , :mustache_con => , :eyeLeft => , :eyeRight => , :mouthLeft =>  , :mouthRight => , :nose => , :leftEyeBrowLeft => , :leftEyeBrowRight => , :leftEyeBrowUp , :rightEyeBrowLeft => , :rightEyeBrowRight => , :rightEyeBrowUp => , :leftEyeLeft => , :leftEyeRight , :leftEyeUp => , :leftEyeDown , :rightEyeLeft , :rightEyeRight , :rightEyeUp => , :rightEyeDown , :noseLeft => , :noseRight => , :mouthUp => , :mouthDown => , :leftPupil => , :rightPupil => ,:upperJawlineLeft => , :midJawlineLeft => , :chinBottom => , :midJawlineRight => , :upperJawlineRight => , :brightness => , :sharpness => , :compare_result => , :label => )
        binding.pry
        new_image.save
        confirm_collection(session)[0].num_images += 1 #increment collection num_images
@@ -48,6 +48,10 @@ class ImagesController < ApplicationController
      end
    end
    redirect "/show/results/#{@source.id}"
+ end
+
+ get "/show/results/:id" do
+   erb :show_compare
  end
 
  delete '/images/:id' do #delete action
