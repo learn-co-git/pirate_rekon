@@ -43,7 +43,12 @@ class ImagesController < ApplicationController
      source = cloud_search_public(idx1)
      target = cloud_search_public(idx2)
      @compare = Image.process(source["resources"][0]["url"], target["resources"][0]["url"])
-   elsif params["soft"] != ""
+     @source = Image.find_by_name(params["source"])
+     @source.compare_result = @compare.face_matches.length.to_s
+     @source.save
+     redirect "aws/compare/#{@source.id}"
+   end
+     if params["soft"] != ""
      @array = []
      @source = Image.find_by_name(params["soft"])
      Image.all.each do |target|
@@ -51,11 +56,15 @@ class ImagesController < ApplicationController
        @array << Image.pirate_rekon(@source, target)
       end
      end
-   end
    @image = Image.find_by_id(@source.id) #this is technically an update
    @image.compare_result = @array.join() # but non-user initiated
    @image.save
    redirect "/show/results/#{@source.id}"
+  end
+ end
+
+ get '/aws/compare/:id' do
+   erb :aws_compare
  end
 
  get "/show/results/:id" do

@@ -1,0 +1,8 @@
+<%@image = Image.find_by_id(params[:id])%>
+<%if @image.compare_result == "0"%>
+<%statement1 = "No individual resides in both images, sorry."%>
+<h1>Your results, <%="#{statement1}"%></h1>
+<%else%>
+<%statement2 = "similar faces were found in both images."%>
+<h1>Your results, <%="#{statement2}"%></h1>
+<%end%>
