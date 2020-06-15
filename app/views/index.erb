@@ -6,6 +6,9 @@
   <p>Process, label and find every other image in your collection and other collections with that individual or individuals. This process is a soft test, or one comprising of less rigorous examination. If soft test returns possible matches, it then advised to run each possible match through option one for a more rigorous testing.</p>
 
   <h3>Option 3.</h3><br>
+  <p>Label an image.</p><br>
+
+  <h3>Option 3.</h3><br>
   <p>Delete an image.</p><br><br><br>
 
 <%redirect '/error' if Image.all == nil%>
@@ -18,7 +21,9 @@
 </body><br>
 <a href="/collections/<%="#{session[:user_id]}"%>/edit">Add Images</a><br><br>
 
-<p>Choose 2 Images to compare, Select a given image to soft test against your collection and others' or delete an image.</p><br>
+<p>Choose 2 Images to compare, Select a given image to soft test against your collection and others', delete an image or add a label.</p><br><br>
+
+<h3>Please remember the image id is after your 'Username/'</h3><br><br>
 
 <form action="/process" method="post">
   <label for="source">Source Image:</label><br>
@@ -28,9 +33,9 @@
   <label for="soft">Soft Test Image:</label><br>
   <input type="text" id="soft" name="soft"><br><br>
   <label for="delete_img">Delete Image:</label><br>
-  <input type="text" id="delete_img" name="delete_img"><br>
+  <input type="text" id="delete_img" name="delete_img"><br><br>
   <input type="submit" value="Submit">
 </form><br><br>
 
-<a href="/attributes/new">Process/Label</a><br>
+<a href="/labels">Label Images</a><br><br><br>
 <a href="/logout">Logout</a>

@@ -45,17 +45,13 @@ class ImagesController < ApplicationController
      @compare = Image.process(source["resources"][0]["url"], target["resources"][0]["url"])
    elsif params["soft"] != ""
      @array = []
-     @source = Image.find_by(:name[params["soft"]])
+     @source = Image.find_by_name(params["soft"])
      Image.all.each do |target|
        if target != @source
        @array << Image.pirate_rekon(@source, target)
       end
      end
    end
-    simple_array = []
-   @array.each do |file|
-     simple_array << file[8...file.length]
-    end
    @image = Image.find_by_id(@source.id) #this is technically an update
    @image.compare_result = @array.join() # but non-user initiated
    @image.save
@@ -66,11 +62,22 @@ class ImagesController < ApplicationController
    erb :show_compare
  end
 
+ get '/labels' do
+   erb :labels_edit
+ end
+
  delete '/images/:id' do #delete action
    cloud_delete(params[:id])
    @image = Image.find_by_id(params[:id])
    @image.delete
    redirect to "/index/#{session[:user_id]}"
+ end
+
+ patch '/labels/:id' do
+   @image = Image.find_by_name(params[:name])
+   @image.label = params[:label]
+   @image.save
+   redirect '/labels'
  end
 
 end

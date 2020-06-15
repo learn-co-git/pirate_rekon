@@ -1,0 +1,24 @@
+<h1>Select an image and add a label</h1><br><br>
+
+<%redirect '/error' if Image.all == nil%>
+
+<body>
+  <%result = cloud_search(session)%>
+<%result["resources"].each do |image|%>
+<img src=<%="#{image["url"]}"%> alt=<%="#{image["filename"].to_i}"%> width="128" height="128">
+<p>Image Id: <%="#{image["public_id"]}"%> </p><br>
+<%end%>
+</body><br><br>
+
+<h3>Please remember the image id is after your 'Username/'</h3><br><br>
+
+<form action="/labels/<%= "#{session[:user_id]}" %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label for="name">Image Name:</label><br>
+  <input type="text" name="name"><br><br>
+  <label for="label">Label:</label><br>
+  <input type="text" name="label"><br><br>
+  <input type="submit" value="submit"><br><br>
+</form>
+<a href="/images/new">more options</a><br><br><br>
+<a href="/logout">Logout</a>

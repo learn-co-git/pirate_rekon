@@ -1,42 +1,52 @@
 <h1>Your results in comparison against all other images</h1><br><br>
-<%first = nil%>
-<%second = nil%>
+<%first = 0%>
+<%second = 0%>
 <%image_name = ''%>
 <%@image = Image.find_by_id(params[:id])%>
-<%@image.compare_result.each do |file|%>
-      <%new_file = file[8...file.length]%>
-      <%first = new_file[0..1].to_i%>
-      <%second = new_file[3..4].to_i%>
-      <%image_name = new_file[6...new_file.length]%>
-      
-<%binding.pry%>
+<%sfile = @image.compare_result.split('BEGINNEW')%>
+
+<%sfile.each do |file|%>
+<%statement = ''%>
+  <%if file.length > 1%>
+  <%array = file.split('')%>
+  <%nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]%>
+    <%pos = array.index('/')%>
+    <%first = array[0...pos].join.to_i%>
+    <%new = array[(pos + 1)..array.length]%>
+    <%neg = new.index('/')%>
+    <%second = new[0...neg].join.to_i%>
+    <%image_name = new[(neg + 1)..new.length].join()%>
+    <%end%>
+
+
 
 <%positive_match = false%>
 <%possible_match = false%>
 <%inconclusive = false%>
 <%no_match = false%>
-<%statement = ''%>
-<%if pic[0][0] > 55 && pic[0][1] < 10%>
+<%if first.to_i > 55 && second.to_i < 20%>
   <%positive_match = true%>
-<%elsif pic[0][0] > 40 || pic[0][1] < 20%>
+<%elsif first.to_i > 40 || second.to_i < 45%>
   <%possible_match = true%>
-<%elsif pic[0][1] > 25%>
+<%elsif second.to_i > 50%>
   <%no_match = true%>
 <%else%>
   <%inconclusive = true%>
 <%end%>
+
   <%if positive_match == true%>
-    <%statement = "We identified #{pic[1].name} as containing #{pic[3].label}. Use more accurate compare face method to confirm"%>
+    <%statement = "We identified #{image_name} as containing #{@image.label}. Use more accurate compare face method to confirm"%>
   <%elsif possible_match == true%>
-    <%statement = "This image #{pic[1].name} possibly contains #{pic[3].label}."%>
+    <%statement = "This image #{image_name} possibly contains #{@image.label}."%>
   <%elsif no_match == true%>
-    <%statement = "No match was found with #{pic[1].name}"%>
+    <%statement = "No match was found with #{image_name}"%>
   <%elsif inconclusive == true%>
-    <%statement = "Findings inconclusive for #{pic[1].name}"%>
+    <%statement = "Findings inconclusive for #{image_name}"%>
     <%end%>
+
     <h2><%="#{statement}"%></h2><br><br>
     <%end%>
-    <%end%>
+
 
     <a href="/">the home page</a><br><br>
     <a href="/logout">Logout</a><br><br>
