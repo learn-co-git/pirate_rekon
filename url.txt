@@ -1,3 +1,0 @@
-<%@user_images.each do |file|%>
-  <%puts%> <%="#{file.name}"%>
-    <%@data = HTTParty.get("#{file.url}")%>

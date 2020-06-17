@@ -1,4 +1,7 @@
-<h1>Your results in comparison against all other images</h1><br><br>
+
+<body>
+<html>
+<h1 style="background-color:DodgerBlue;">Your results against all other images</h1><br><br>
 <%first = 0%>
 <%second = 0%>
 <%image_name = ''%>
@@ -43,10 +46,13 @@
   <%elsif inconclusive == true%>
     <%statement = "Findings inconclusive for #{image_name}"%>
     <%end%>
-
-    <h2><%="#{statement}"%></h2><br><br>
+  <ul>
+  <li>  <h2 style="text-decoration:underline;"><%="#{statement}"%></h2></li><br><br>
+  </ul>
     <%end%>
 
 
-    <a href="/">the home page</a><br><br>
+    <a href="/images/new">Return</a><br>
     <a href="/logout">Logout</a><br><br>
+  </body>
+</html>

@@ -1,15 +1,28 @@
-<h1>Your Images</h1><br><br>
-  <h3>Option 1.</h3><br>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+
+  <title>PirateRekon</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-rvwYMW9Z/bbxZfgxHQEKx6D91KwffWAG+XnsoYNCGWi/qL1P9dIVYm1HBiHFqQEt" crossorigin="anonymous">
+</head>
+
+
+
+<h1 style="background-color:DodgerBlue;">Your Images</h1><br><br>
+  <h3>Option 1.</h3>
   <p>Choose any two, we'll examine the likelihood that any one individual resides in both images.</p><br>
 
-  <h3>Option 2.</h3><br>
+  <h3>Option 2.</h3>
   <p>Process, label and find every other image in your collection and other collections with that individual or individuals. This process is a soft test, or one comprising of less rigorous examination. If soft test returns possible matches, it then advised to run each possible match through option one for a more rigorous testing.</p>
 
-  <h3>Option 3.</h3><br>
+  <h3>Option 3.</h3>
   <p>Label an image.</p><br>
 
-  <h3>Option 3.</h3><br>
-  <p>Delete an image.</p><br><br><br>
+  <h3>Option 4.</h3>
+  <p>Delete an image.</p><br><br>
 
 <%redirect '/error' if Image.all == nil%>
 <body>
@@ -19,23 +32,23 @@
 <p>Image Id: <%="#{image["public_id"]}"%> </p><br>
 <%end%>
 </body><br>
-<a href="/collections/<%="#{session[:user_id]}"%>/edit">Add Images</a><br><br>
+<a href="/collections/<%="#{session[:user_id]}"%>/edit">Add Images</a><br><a href="/labels">Label Images</a><br>
 
-<p>Choose 2 Images to compare, Select a given image to soft test against your collection and others', delete an image or add a label.</p><br><br>
+<br><h4>Choose 2 Images to compare, Select a given image to soft test against your collection and others', delete an image or add a label.</h4><br>
 
-<h3>Please remember the image id is after your 'Username/'</h3><br><br>
+<h4>Please remember the image id is after your 'Username/'</h4><br>
 
 <form action="/process" method="post">
   <label for="source">Source Image:</label><br>
-  <input type="text" id="source" name="source"><br><br>
+  <input type="text" id="source" name="source"><br>
   <label for="target">Target Image:</label><br>
-  <input type="text" id="target" name="target"><br><br>
+  <input type="text" id="target" name="target"><br>
   <label for="soft">Soft Test Image:</label><br>
-  <input type="text" id="soft" name="soft"><br><br>
+  <input type="text" id="soft" name="soft"><br>
   <label for="delete_img">Delete Image:</label><br>
-  <input type="text" id="delete_img" name="delete_img"><br><br>
+  <input type="text" id="delete_img" name="delete_img"><br>
   <input type="submit" value="Submit">
 </form><br><br>
 
-<a href="/labels">Label Images</a><br><br><br>
+
 <a href="/logout">Logout</a>

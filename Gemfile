@@ -21,6 +21,7 @@ gem 'rack'
 gem 'json'
 gem 'httparty'
 gem 'activesupport'
+gem 'bootstrap', '~> 4.5'
 
 
 

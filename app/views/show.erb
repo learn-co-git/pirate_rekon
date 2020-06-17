@@ -1,6 +1,6 @@
-<h1>Your collection <%="#{@user[:username]}"%> </h1><br><br>
+<h1 style="color:DarkOrange;">Your collection <%="#{@user[:username]}"%> </h1><br><br>
 <%@collection.each_with_index do |album, i|%>
-  <h2><%puts%><%="....." + "#{album[:name]}" + "....."%></h2>
+  <h2 style="color:DarkBlue"><%puts%><%="....." + "#{album[:name]}" + "....."%></h2>
   <%end%><br><br>
-  <a href="/collections/<%="#{@collection.first.user_id}"%>/edit">Add Images</a><br><br>
-  <br><a href="/index/<%="#{@collection.first.user_id}"%>">Go to Album</a><br>
+  <a href="/collections/<%="#{@collection.first.user_id}"%>/edit">Add Images</a><br>
+  <br><a href="/index/<%="#{@collection.first.user_id}"%>">Go to Album</a><br><br><br><br><br>
