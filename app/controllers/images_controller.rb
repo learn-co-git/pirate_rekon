@@ -75,7 +75,7 @@ class ImagesController < ApplicationController
    erb :labels_edit
  end
 
- delete '/images/:id' do 
+ delete '/images/:id' do
    cloud_delete(params[:id])
    @image = Image.find_by_id(params[:id])
    @image.delete
