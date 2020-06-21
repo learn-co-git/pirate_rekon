@@ -12,10 +12,7 @@ require 'aws-sdk-s3'
 
 
 
-Aws.config.update({
-  region: 'us-west-2',
-  credentials: Aws::Credentials.new('AKIA2MPVCMTYMIW5DK4A', 'khGL1/kfd76KmT2/FrJXHoxqM9kSjB75yQFJDjKQ')
-})
+
 
 Bundler.require(:default, ENV['SINATRA_ENV'])
 

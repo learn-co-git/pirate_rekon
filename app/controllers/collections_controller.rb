@@ -3,21 +3,19 @@ class CollectionsController < ApplicationController
 
 
   get '/home' do
+    @user = current_user(session)
     if confirm_collection(session).empty?
-      @user = current_user(session)
       erb :home
     else
-      redirect "/collections/#{:user_id}"
+      redirect "/collections/#{@user.id}"
     end
   end
-  #technically a user can create more then 1 collection,
-  #decided to remove this functionality without actually do so.
 
-  get '/collections/:user_id' do #display user and all images
+
+  get '/collections/:user_id' do
      @collection = Collection.all.select {|record| record.user_id == session[:user_id].to_i}
      @user = User.find_by_id(session[:user_id])
      @images = Image.all.select {|pic| pic.collection_id == session[:user_id]}
-     # @images - single image 'url' is @images[i].url
      erb :show
   end
 
@@ -25,12 +23,12 @@ class CollectionsController < ApplicationController
     erb :new
   end
 
-  get '/index/:id' do    #user id
-    @user_images = user_images(session) #show all user images
+  get '/index/:id' do
+    @user_images = user_images(session)
     erb :index
   end
 
-  post '/collections' do #create new collection
+  post '/collections' do
     @user_collection = Collection.new(:name => params[:collection], :creation_date => Time.now, :user_id => session[:user_id], :num_images => 1)
     @user_collection.save
 
@@ -38,7 +36,7 @@ class CollectionsController < ApplicationController
     redirect to "/collections/#{@user_collection.user_id}"
   end
 
-  #this edit add images to user collection(1 collection/user)
+
   get '/collections/:user_id/edit' do
      @params = params
      @album = confirm_collection(session)

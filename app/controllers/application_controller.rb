@@ -5,7 +5,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, Proc.new { File.join(root, "../views/") }
     enable :sessions
-    set :session_secret, "secret" #need to fix this for production, standin ONLY
+    set :session_secret, "secret"
   end
 
   helpers do
@@ -72,7 +72,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/login' do #had issues moving data from one controller to another
+  post '/login' do 
     @params = params
     user = User.find_by_email(@params[:email])
     if user != nil && user.authenticate(@params[:password])

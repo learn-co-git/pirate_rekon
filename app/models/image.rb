@@ -5,8 +5,7 @@ class Image < ActiveRecord::Base
   belongs_to :collection
 
   #this needs to be made secret for production
-  Credentials = Aws::Credentials.new(
-     'AKIA2MPVCMTYMIW5DK4A', 'khGL1/kfd76KmT2/FrJXHoxqM9kSjB75yQFJDjKQ')
+
 
   def open(url)
     Net::HTTP.get(URI.parse(url))
